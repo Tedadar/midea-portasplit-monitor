@@ -25,7 +25,6 @@ class MultiShop(BaseShop):
     name = "multishop"
 
     URLS = [
-
         # ✅ Baumärkte
         ("obi", "https://www.obi.de/search/midea%20portasplit/"),
         ("hornbach", "https://www.hornbach.de/suche/midea%20portasplit/"),
@@ -42,15 +41,38 @@ class MultiShop(BaseShop):
         ("alternate", "https://www.alternate.de/listing.xhtml?q=midea+portasplit"),
         ("conrad", "https://www.conrad.de/de/search.html?search=midea%20portasplit"),
 
-        # ✅ Marktplätze (sehr wichtig!)
+        # ✅ Marktplätze
         ("amazon", "https://www.amazon.de/s?k=midea+portasplit"),
         ("ebay", "https://www.ebay.de/sch/i.html?_nkw=midea+portasplit"),
         ("kaufland", "https://www.kaufland.de/suche/?search_value=midea%20portasplit"),
 
-        # ✅ Spezial-/Klima-Shops (optional, aber gut)
+        # ✅ Spezialshops
         ("klimaworld", "https://www.klimaworld.com/search?sSearch=midea+portasplit"),
         ("klivatec", "https://klivatec.de/search?sSearch=midea+portasplit"),
     ]
+
+    # ✅ Browser-Fallback (gegen Bot-Block)
+    def fetch_with_browser(self, url):
+        try:
+            from playwright.sync_api import sync_playwright
+
+            with sync_playwright() as p:
+                browser = p.chromium.launch(headless=True)
+                page = browser.new_page()
+
+                print("DEBUG: Browser loading", url)
+
+                page.goto(url, timeout=30000)
+                page.wait_for_timeout(3000)
+
+                html = page.content()
+                browser.close()
+
+                return html
+
+        except Exception as e:
+            print("DEBUG: Playwright error:", e)
+            return None
 
     def fetch(self):
         products = []
@@ -59,10 +81,17 @@ class MultiShop(BaseShop):
             print(f"DEBUG: Checking {shop_name}")
 
             try:
+                # ✅ 1. Versuch: normaler Request
                 html = self._get(url)
 
+                # ✅ 2. Fallback: Browser wenn blockiert
                 if not html or len(html) < 5000:
-                    print(f"DEBUG: {shop_name} blocked or empty")
+                    print(f"DEBUG: {shop_name} blocked → using browser")
+                    html = self.fetch_with_browser(url)
+
+                # ✅ Wenn weiterhin nichts
+                if not html or len(html) < 5000:
+                    print(f"DEBUG: {shop_name} still empty")
                     continue
 
                 soup = BeautifulSoup(html, "html.parser")
