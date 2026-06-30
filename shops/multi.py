@@ -1,6 +1,21 @@
 import requests
 from bs4 import BeautifulSoup
 from models import Product
+
+print("DEBUG: FAKE PRODUCT TEST")
+
+products = [
+    Product(
+        name="Midea PortaSplit TEST",
+        price=499,
+        url="https://example.com",
+        shop="test",
+        available=True
+    )
+]
+
+return products
+
 from shops.base import BaseShop
 
 
