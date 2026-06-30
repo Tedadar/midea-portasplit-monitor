@@ -11,18 +11,11 @@ def product_id(product):
 
 def format_message(p):
     return (
-        f"🔥 *Deal gefunden!*
-
-"
-        f"*{p.name}*
-"
-        f"💰 {p.price} €
-"
-        f"🏪 {p.shop}
-"
-        f"✅ Verfügbar
-
-"
+        f"🔥 *Deal gefunden!*\n\n"
+        f"*{p.name}*\n"
+        f"💰 {p.price} €\n"
+        f"🏪 {p.shop}\n"
+        f"✅ Verfügbar\n\n"
         f"{p.url}"
     )
 
