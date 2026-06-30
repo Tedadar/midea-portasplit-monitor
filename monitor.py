@@ -2,7 +2,7 @@ import logging
 from config import MAX_PRICE
 from storage import is_new_alert, mark_alert, add_price_history
 from notifier import send_telegram
-from shops.idealo import IdealoShop
+from shops.multi import MultiShop
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -37,7 +37,7 @@ def process_products(products):
         mark_alert(pid)
 
 def main():
-    shops = [IdealoShop()]
+    shops = [MultiShop()]
     for shop in shops:
         try:
             logging.info(f"Checking {shop.name}")
