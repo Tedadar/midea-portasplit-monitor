@@ -80,4 +80,3 @@ class MultiShop(BaseShop):
                 print(f"ERROR in {shop_name}: {e}")
 
         return products
-``
