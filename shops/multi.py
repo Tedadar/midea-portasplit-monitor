@@ -1,21 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 from models import Product
-
-print("DEBUG: FAKE PRODUCT TEST")
-
-products = [
-    Product(
-        name="Midea PortaSplit TEST",
-        price=499,
-        url="https://example.com",
-        shop="test",
-        available=True
-    )
-]
-
-return products
-
 from shops.base import BaseShop
 
 
@@ -30,52 +15,22 @@ class MultiShop(BaseShop):
         ("kaufland", "https://www.kaufland.de/suche/?search_value=midea%20portasplit")
     ]
 
-    def fetch(self):
-        products = []
+def fetch(self):
+    from models import Product
 
-        for shop_name, url in self.URLS:
-            try:
-                print(f"DEBUG: Checking {shop_name}")
-                html = self._get(url)
+    print("DEBUG: FAKE PRODUCT TEST")
 
-                if not html:
-                    print(f"DEBUG: {shop_name} blocked or empty")
-                    continue
+    products = [
+        Product(
+            name="Midea PortaSplit TEST",
+            price=499,
+            url="https://example.com",
+            shop="test",
+            available=True
+        )
+    ]
 
-                soup = BeautifulSoup(html, "html.parser")
-
-                # Sehr generische Suche (funktioniert überraschend gut)
-                items = soup.find_all("a")
-
-                for item in items:
-                    text = item.get_text(strip=True)
-
-                    if not text:
-                        continue
-
-                    if "midea" in text.lower():
-                        price = self.extract_price(text)
-
-                        if price:
-                            link = item.get("href")
-
-                            if link and not link.startswith("http"):
-                                link = "https://" + shop_name + ".de" + link
-
-                            products.append(Product(
-                                name=text[:100],
-                                price=price,
-                                url=link or url,
-                                shop=shop_name,
-                                available=True
-                            ))
-
-                            print(f"✅ FOUND: {shop_name} - {price}€")
-
-            except Exception as e:
-                print(f"ERROR in {shop_name}: {e}")
-
-        return products
+    return products
 
     def extract_price(self, text):
         import re
