@@ -8,12 +8,21 @@ class IdealoShop(BaseShop):
 
     def fetch(self):
         html = self._get(self.SEARCH_URL)
+
+        print("DEBUG: HTML length =", len(html) if html else 0)
+        
         if not html:
             return []
 
         soup = BeautifulSoup(html, "html.parser")
         products = []
         items = soup.select(".offerList-item")
+
+        print("DEBUG: Items found =", len(items))
+        
+        for item in items[:3]:
+            print("DEBUG ITEM:", item.get_text(strip=True)[:200])
+
 
         for item in items:
             try:
