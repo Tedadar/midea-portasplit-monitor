@@ -25,10 +25,31 @@ class MultiShop(BaseShop):
     name = "multishop"
 
     URLS = [
+
+        # ✅ Baumärkte
         ("obi", "https://www.obi.de/search/midea%20portasplit/"),
         ("hornbach", "https://www.hornbach.de/suche/midea%20portasplit/"),
         ("bauhaus", "https://www.bauhaus.info/suche/produkte?query=midea%20portasplit"),
+        ("toom", "https://toom.de/suche/?searchTerm=midea%20portasplit"),
+
+        # ✅ Elektrofachmärkte
+        ("mediamarkt", "https://www.mediamarkt.de/de/search.html?query=midea%20portasplit"),
+        ("saturn", "https://www.saturn.de/de/search.html?query=midea%20portasplit"),
+        ("expert", "https://www.expert.de/search?query=midea%20portasplit"),
+
+        # ✅ Online-Händler
         ("otto", "https://www.otto.de/suche/midea%20portasplit/"),
+        ("alternate", "https://www.alternate.de/listing.xhtml?q=midea+portasplit"),
+        ("conrad", "https://www.conrad.de/de/search.html?search=midea%20portasplit"),
+
+        # ✅ Marktplätze (sehr wichtig!)
+        ("amazon", "https://www.amazon.de/s?k=midea+portasplit"),
+        ("ebay", "https://www.ebay.de/sch/i.html?_nkw=midea+portasplit"),
+        ("kaufland", "https://www.kaufland.de/suche/?search_value=midea%20portasplit"),
+
+        # ✅ Spezial-/Klima-Shops (optional, aber gut)
+        ("klimaworld", "https://www.klimaworld.com/search?sSearch=midea+portasplit"),
+        ("klivatec", "https://klivatec.de/search?sSearch=midea+portasplit"),
     ]
 
     def fetch(self):
