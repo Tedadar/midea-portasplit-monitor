@@ -32,7 +32,7 @@ class MultiShop(BaseShop):
 
                 # nach "Midea" + Preis in Nähe suchen
                 matches = re.findall(
-                    r"(Midea[^€]{0,100}?(\d{3,4}[.,]\d{2})\s?€)",
+                    r"(Midea[^€]{0,100}PortaSplit[^€]{0,100}?(\d{1,4}(?:[.,]\d{3})*[.,]\d{2})\s?€)",
                     text_blocks,
                     re.IGNORECASE
                 )
