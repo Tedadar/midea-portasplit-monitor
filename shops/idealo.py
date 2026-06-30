@@ -17,24 +17,32 @@ class IdealoShop:
             print("DEBUG: Opening Idealo...")
             page.goto(self.URL, timeout=30000)
 
+            # ✅ WICHTIG: Cookie-Banner akzeptieren
+            try:
+                page.click('button:has-text("Akzeptieren")', timeout=5000)
+                print("DEBUG: Cookie accepted")
+            except:
+                print("DEBUG: No cookie popup found")
+
+            # ✅ warten bis Inhalt geladen ist
             page.wait_for_timeout(5000)
 
             html = page.content()
             print("DEBUG: HTML length:", len(html))
 
-            # simple detection
-            if "Midea" not in html:
-                print("DEBUG: No products found in HTML")
-                return []
+            # 👉 Debug: prüfen ob Inhalte da sind
+            if "Midea" in html:
+                print("DEBUG: Found 'Midea' in HTML")
 
-            # EXTREM simpel erstmal:
-            products.append(Product(
-                name="Midea PortaSplit (detected via Playwright)",
-                price=999,  # placeholder
-                url=self.URL,
-                shop=self.name,
-                available=True
-            ))
+                products.append(Product(
+                    name="Midea PortaSplit (Playwright)",
+                    price=999,
+                    url=self.URL,
+                    shop=self.name,
+                    available=True
+                ))
+            else:
+                print("DEBUG: Still no products detected")
 
             browser.close()
 
