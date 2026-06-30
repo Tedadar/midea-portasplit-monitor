@@ -1,3 +1,18 @@
 {
-  "test:https://example.com:499": true
+  "test:https://example.com:499": true,
+  "otto:https://www.otto.de/suche/midea%20portasplit/:80.45": true,
+  "otto:https://www.otto.de/suche/midea%20portasplit/:220.5": true,
+  "otto:https://www.otto.de/suche/midea%20portasplit/:676.6": true,
+  "otto:https://www.otto.de/suche/midea%20portasplit/:634.36": true,
+  "otto:https://www.otto.de/suche/midea%20portasplit/:689.1": true,
+  "otto:https://www.otto.de/suche/midea%20portasplit/:895.61": true,
+  "otto:https://www.otto.de/suche/midea%20portasplit/:938.28": true,
+  "otto:https://www.otto.de/suche/midea%20portasplit/:682.02": true,
+  "otto:https://www.otto.de/suche/midea%20portasplit/:335.95": true,
+  "otto:https://www.otto.de/suche/midea%20portasplit/:929.3": true,
+  "otto:https://www.otto.de/suche/midea%20portasplit/:230.5": true,
+  "otto:https://www.otto.de/suche/midea%20portasplit/:659.18": true,
+  "otto:https://www.otto.de/suche/midea%20portasplit/:350.16": true,
+  "otto:https://www.otto.de/suche/midea%20portasplit/:558.02": true,
+  "otto:https://www.otto.de/suche/midea%20portasplit/:416.82": true
 }
