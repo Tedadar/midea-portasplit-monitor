@@ -36,6 +36,9 @@ def process_products(products):
         send_telegram(format_message(p))
         mark_alert(pid)
 
+from notifier import send_telegram
+send_telegram("✅ TEST: Bot funktioniert")
+
 def main():
     shops = [MultiShop()]
     for shop in shops:
