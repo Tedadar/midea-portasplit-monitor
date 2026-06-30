@@ -75,6 +75,10 @@ def process_products(products):
             traceback.print_exc()
 
 
+        from notifier import send_telegram
+            send_telegram("✅ Bot läuft")
+
+
 # ✅ MAIN LOOP
 def main():
     shops = [
