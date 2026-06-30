@@ -1,7 +1,7 @@
 import os
 
 PRODUCT_KEYWORDS = ["Midea PortaSplit"]
-MAX_PRICE = 900.0
+MAX_PRICE = 5000.0
 REQUEST_TIMEOUT = 15
 RETRY_COUNT = 3
 
