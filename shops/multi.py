@@ -15,22 +15,20 @@ class MultiShop(BaseShop):
         ("kaufland", "https://www.kaufland.de/suche/?search_value=midea%20portasplit")
     ]
 
-def fetch(self):
-    from models import Product
+    def fetch(self):
+        print("DEBUG: FAKE PRODUCT TEST")
 
-    print("DEBUG: FAKE PRODUCT TEST")
+        products = [
+            Product(
+                name="Midea PortaSplit TEST",
+                price=499,
+                url="https://example.com",
+                shop="test",
+                available=True
+            )
+        ]
 
-    products = [
-        Product(
-            name="Midea PortaSplit TEST",
-            price=499,
-            url="https://example.com",
-            shop="test",
-            available=True
-        )
-    ]
-
-    return products
+        return products
 
     def extract_price(self, text):
         import re
