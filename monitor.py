@@ -75,15 +75,14 @@ def process_products(products):
             traceback.print_exc()
 
 
-        from notifier import send_telegram
-            send_telegram("✅ Bot läuft")
-
-
 # ✅ MAIN LOOP
+
 def main():
     shops = [
         MultiShop(),
     ]
+
+    products_found = False
 
     for shop in shops:
         try:
@@ -94,11 +93,19 @@ def main():
                 logging.info("No products found")
                 continue
 
+            products_found = True
             process_products(products)
 
         except Exception as e:
             logging.error(f"Error in {shop.name}: {e}")
             traceback.print_exc()
+
+    # ✅ STATUS-NACHRICHT HIER!
+    if products_found:
+        send_telegram("✅ Bot gelaufen – Produkte verarbeitet")
+    else:
+        send_telegram("✅ Bot gelaufen – keine Treffer")
+
 
 
 # ✅ Startpunkt
