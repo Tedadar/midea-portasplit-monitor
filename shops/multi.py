@@ -41,7 +41,10 @@ class MultiShop(BaseShop):
                     full_text = match[0]
                     price_raw = match[1]
 
-                    price = float(price_raw.replace(",", "."))
+                    
+                    price_clean = price_raw.replace(".", "").replace(",", ".")
+                    price = float(price_clean)
+
 
                     print(f"✅ FOUND: {shop_name} - {price}€")
 
