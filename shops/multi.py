@@ -4,6 +4,7 @@ from models import Product
 from shops.base import BaseShop
 
 
+# ✅ Keyword Varianten
 KEYWORDS = [
     "portasplit",
     "porta split",
@@ -41,45 +42,3 @@ class MultiShop(BaseShop):
                 html = self._get(url)
 
                 if not html or len(html) < 5000:
-                    print(f"DEBUG: {shop_name} blocked or empty")
-                    continue
-
-                soup = BeautifulSoup(html, "html.parser")
-                text_blocks = soup.get_text(separator=" ")
-
-                matches = re.findall(
-                    r"(Midea[^€]{0,120}?(\d{1,4}(?:[.,]\d{3})*[.,]\d{2})\s?€)",
-                    text_blocks,
-                    re.IGNORECASE
-                )
-
-                for match in matches:
-                    full_text = match[0]
-                    price_raw = match[1]
-
-                    # ✅ Keyword-Filter
-                    if not is_relevant_product(full_text):
-                        continue
-
-                    # ✅ Preis korrekt parsen
-                    try:
-                        price_clean = price_raw.replace(".", "").replace(",", ".")
-                        price = float(price_clean)
-                    except:
-                        continue
-
-                    print(f"✅ FOUND: {shop_name} - {price}€")
-
-                    products.append(Product(
-                        name=full_text[:120],
-                        price=price,
-                        url=url,
-                        shop=shop_name,
-                        available=True
-                    ))
-
-            except Exception as e:
-                print(f"ERROR in {shop_name}: {e}")
-
-        return products
-``
